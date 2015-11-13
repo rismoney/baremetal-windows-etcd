@@ -22,10 +22,6 @@ $hostname = X:\dhcptest-0.5-win64.exe --mac $macaddress --request 12 --query --p
 write-host  -Foregroundcolor magenta  "Hostname obtained via dhcp option 12: $hostname"
 write-host "if the hostname is not correct please abort"
 
-# set an environment variables.  The ise_mock_fqdn and ise_kickstarting tie back to facter facts
-# ise_mock_fqdn overcomes the issue where Windows PE typically boots with a name like MINI-NT######
-$env:ise_mock_fqdn = $hostname
-$env:FACTER_env_windows_installdir="X:\puppet-3.8.3"
 $env:ise_kickstarting="yes"
 
 
@@ -33,7 +29,7 @@ $env:ise_kickstarting="yes"
 # to manually type a branch name.  If no branch is provided, we will be using production.
 
 #start of branch selection routine
-$timer = 600
+$timer = 30
 $i = 1
 
 Do {
@@ -44,7 +40,7 @@ Do {
   if($host.UI.RawUI.KeyAvailable) {
     $Host.UI.RawUI.FlushInputBuffer()
     write-output ""
-    $branch= Read-Host "Please enter the branch you would like to run the puppet agent against"
+    $branch= Read-Host "Please enter the branch you would like to build against"
     $timer=-1
   }
 start-Sleep -Seconds 1
@@ -52,14 +48,10 @@ start-Sleep -Seconds 1
 $i++
 }While ($i -le $timer)
 
-# this might need to be changed to "master" instead of production depending upon git branching workflow you use
 if (!$branch) {$branch = "production"}
 # end of branch selection routine
 
-# call host-enforce against our 3 relevant modules.  host-enforce is a puppet agent run
-X:\host-enforce.ps1 -b $branch -tags "winbuild, choco, ringo, firmware" -disableeventlog true
-
-# call out post puppet script (this is empty in this repo- but we deploy a replacement file to do more needful ops)
+# replace script below after cgi imported
 X:\post-puppet.ps1
 
 #save branch name to disk for later consumption
