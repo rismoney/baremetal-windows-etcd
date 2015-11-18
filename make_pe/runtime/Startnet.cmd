@@ -7,6 +7,4 @@ set path=X:\windows\system32;X:\Windows\System32\WindowsPowerShell\v1.0
 
 Powershell.exe -ExecutionPolicy Unrestricted x:\custom.ps1
 
-echo sleeping for 20 seconds.  press control-c to terminate batch without reboot
-sleep 20
 exit

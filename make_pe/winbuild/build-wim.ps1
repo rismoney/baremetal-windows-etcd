@@ -42,18 +42,17 @@ function build-wim {
   write-output "win pe startup scripts"
   echo d |xcopy /Y "$runtimefolder\startnet.cmd" "$mountfolder\Windows\System32"
   echo d |xcopy /Y "$runtimefolder\custom.ps1" "$mountfolder"
-  echo d |xcopy /Y "$runtimefolder\host-enforce.ps1" "$mountfolder"
-  #echo d |xcopy /Y "$runtimefolder\get-DHCPHostname.ps1" "$mountfolder"
+  echo d |xcopy /Y "$runtimefolder\image.ps1" "$mountfolder"
+  echo d |xcopy /Y "$runtimefolder\network.ps1" "$mountfolder"
+  echo d |xcopy /Y "$runtimefolder\post-script.ps1" "$mountfolder"
+  echo d |xcopy /Y "$runtimefolder\prep-disk.ps1" "$mountfolder"
+  echo d |xcopy /Y "$runtimefolder\tokenxml.ps1" "$mountfolder"
+
   echo d | xcopy /S /Y "$downloadfolder\dhcptest-0.5-win64.exe" "$mountfolder"
 
   write-output "#copy zip executable"
   write-output "add get-webfile to winpe"
   echo d |xcopy /Y "$winbuild\Get-WebFile.ps1" "$mountfolder\tools"
-  # echo d |xcopy /Y "$config\GemFile" "$mountfolder"
-
-  #deprecate imagex
-  #write-output "add imagex"
-  #echo d |xcopy /Y "$adkfolder\Assessment and Deployment Kit\Deployment Tools\x86\DISM\imagex.exe" "$mountfolder\tools"
 
   write-output "add 3rd party drivers"
   if (test-path -path $driverfolder) {
