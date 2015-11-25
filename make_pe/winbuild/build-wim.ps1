@@ -24,7 +24,7 @@ function build-wim {
     exit 1
   }
 
-    write-output "set the scratch space"
+  write-output "set the scratch space"
   try {
     $winpewim_file="$winpefolder\winpe.wim"
     & $dism /image:$mountfolder /set-scratchspace:128
@@ -46,7 +46,6 @@ function build-wim {
   echo d |xcopy /Y "$runtimefolder\network.ps1" "$mountfolder"
   echo d |xcopy /Y "$runtimefolder\post-script.ps1" "$mountfolder"
   echo d |xcopy /Y "$runtimefolder\prep-disk.ps1" "$mountfolder"
-  echo d |xcopy /Y "$runtimefolder\tokenxml.ps1" "$mountfolder"
 
   echo d | xcopy /S /Y "$downloadfolder\dhcptest-0.5-win64.exe" "$mountfolder"
 
