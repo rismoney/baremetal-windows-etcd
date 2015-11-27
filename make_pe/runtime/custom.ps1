@@ -14,7 +14,7 @@ write-host "if the hostname is not correct please abort"
 
 # get the build specs
 mkdir X:\build
-$branch = Invoke-WebRequest -Uri "http://puppet.inf.ise.com:8080/cgi-bin/branch.rb?ise_mock_fqdn=$fqdn" -usebasicparsing
+$branch = (Invoke-WebRequest -Uri "http://puppet.inf.ise.com:8080/cgi-bin/branch.rb?ise_mock_fqdn=$fqdn" -usebasicparsing).content
 
 
 # fetch unattend.xml for fqdn and branch
