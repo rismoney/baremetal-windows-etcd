@@ -30,7 +30,7 @@ prep-disk $targetos
 Lay-Image $targetos
 
 # download post script
-Invoke-WebRequest -Uri "http://chocopackages.ise.com/windows/post-script.ps1" -outfile C:\@inf\winbuild\scripts\post-script.ps1
+Invoke-WebRequest -Uri "http://chocopackages.ise.com/bootstrap/post-script.ps1" -outfile C:\@inf\winbuild\scripts\post-script.ps1
 
 if ($targetos -eq 'win2008') {
   if ($xml.'#comment'[1] -eq 'enterprise') {
